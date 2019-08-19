@@ -1,14 +1,17 @@
-import React from 'react';
-import renderer from 'react-test-renderer'; // 1: install this npm module as a dev dependency
-import Display from './Display'
+import React from "react";
+import Display from "./Display";
+import { render } from "react-testing-library";
+import "react-testing-library/cleanup-after-each";
 
-describe('<Display />', () => {
-  // 2. write this test
-  it('matches snapshot', () => {
-    const tree = renderer.create(<Display />); // generates a DOM tree
-
-    // snapshots are a JSON representation of the DOM tree
-    expect(tree.toJSON()).toMatchSnapshot();
+describe("<Display />", () => {
+  it("is open and unlocked", () => {
+    const { getByText } = render(<Display />);
+    expect(getByText("Unlocked"));
+    expect(getByText("Open"));
   });
-
+  it("accepts props", () => {
+    const { getByText } = render(<Display locked={true} closed={true} />);
+    expect(getByText("Locked"));
+    expect(getByText("Closed"));
+  });
 });

@@ -1,13 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer'; // 1: install this npm module as a dev dependency
+import renderer from 'react-test-renderer';
 import Controls from './Controls'
+import { render, fireEvent } from "@testing-library/react";
 
 describe('<Controls />', () => {
-  // 2. write this test
   it('matches snapshot', () => {
-    const tree = renderer.create(<Controls />); // generates a DOM tree
-
-    // snapshots are a JSON representation of the DOM tree
+    const tree = renderer.create(<Controls />);
     expect(tree.toJSON()).toMatchSnapshot();
   });
 
